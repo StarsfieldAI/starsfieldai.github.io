@@ -83,7 +83,47 @@
                 </div>
                 <div class="md:w-1/2">
                     <div class="glass-card p-8 rounded-xl">
-                        <img src="https://placehold.co/600x400/000010/00FFFF?text=Agentic+RL+Concept" alt="Abstract AI concept art" class="rounded-lg shadow-2xl" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000010/FFFFFF?text=Image+Not+Found';">
+                        <!-- Agentic RL Cycle SVG -->
+                        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto rounded-lg">
+                            <defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#00FFFF" />
+                                </marker>
+                                <style>
+                                    .text-label { font-family: 'Inter', sans-serif; font-size: 16px; fill: #E0E0E0; text-anchor: middle; }
+                                    .text-bold { font-weight: bold; fill: #00FFFF; }
+                                    .flow-line { stroke: #00FFFF; stroke-width: 1.5; fill: none; opacity: 0.6; }
+                                    .node-circle { fill: rgba(10, 10, 25, 0.7); stroke: #00FFFF; stroke-width: 1; }
+                                </style>
+                            </defs>
+                    
+                            <!-- Agent Node -->
+                            <g transform="translate(150, 60)">
+                                <circle r="35" class="node-circle" />
+                                <text y="5" class="text-label text-bold">Agent</text>
+                            </g>
+                    
+                            <!-- Environment Node -->
+                            <g transform="translate(150, 240)">
+                                <circle r="45" class="node-circle" />
+                                <text y="5" class="text-label text-bold">Environment</text>
+                            </g>
+                    
+                            <!-- Action Path -->
+                            <path id="actionPath" d="M 180, 90 A 80 80, 0, 0, 1, 195 195" class="flow-line" marker-end="url(#arrowhead)" />
+                            <text dy="-5" class="text-label">
+                                <textPath href="#actionPath" startOffset="50%">Action</textPath>
+                            </text>
+                    
+                            <!-- Observation & Reward Path -->
+                            <path id="obsPath" d="M 105, 195 A 80 80, 0, 0, 1, 120 90" class="flow-line" marker-end="url(#arrowhead)" />
+                            <text dy="-5" class="text-label">
+                                <textPath href="#obsPath" startOffset="50%">Observation</textPath>
+                            </text>
+                             <text dy="15" class="text-label">
+                                <textPath href="#obsPath" startOffset="50%">Reward</textPath>
+                            </text>
+                        </svg>
                     </div>
                 </div>
             </div>
