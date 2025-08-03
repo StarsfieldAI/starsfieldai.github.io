@@ -1,491 +1,187 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>星原智能 (Starsfield AI) - 全球首个Agent数据与评估基础设施</title>
+    <title>Starsfield AI - The World's First Agent Data & Evaluation Infrastructure</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', 'Noto Sans SC', sans-serif;
-            background-color: #020617; /* slate-950 */
-            color: #e2e8f0; /* slate-200 */
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A; /* near-black background */
+            color: #E5E5E5; /* off-white text */
         }
-        #starfield {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Place canvas behind all other content */
+        /* Applying the mono font to all headings */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 700;
+            color: #F4F4F5; /* brighter white for headings */
         }
-        .gradient-text {
-            background: linear-gradient(to right, #7dd3fc, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
+        .accent-green {
+            color: #34D399; /* emerald-400 */
         }
-        .card-bg {
-            background-color: rgba(15, 23, 42, 0.5); /* slate-900 with opacity */
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(51, 65, 85, 0.5); /* slate-700 with opacity */
+        .bordered-box {
+            border: 1px solid #27272A; /* zinc-800 */
+            border-radius: 0.75rem; /* rounded-xl */
         }
     </style>
 </head>
-<body>
-    <!-- Starfield Canvas -->
-    <canvas id="starfield"></canvas>
+<body class="antialiased">
 
-    <!-- Header / Navigation -->
-    <header class="bg-slate-950/80 backdrop-blur-sm sticky top-0 z-50 border-b border-slate-800">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold tracking-wider gradient-text" data-key="company_name">
-                星原智能
+    <header class="sticky top-0 z-50 bg-[#0A0A0A]/80 backdrop-blur-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center border-b border-[#27272A]">
+            <a href="#" class="text-xl md:text-2xl" style="font-family: 'IBM Plex Mono', monospace; font-weight: 700;">
+                Starsfield AI
             </a>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#about" class="text-slate-300 hover:text-sky-400 transition-colors duration-300" data-key="nav_about">关于我们</a>
-                <a href="#careers" class="text-slate-300 hover:text-sky-400 transition-colors duration-300" data-key="nav_careers">加入我们</a>
-                <button id="lang-switcher" class="text-slate-300 hover:text-sky-400 transition-colors duration-300 border border-slate-600 px-3 py-1 rounded-md text-sm">EN / 中文</button>
+            <div class="flex items-center space-x-6 md:space-x-8 text-sm md:text-base">
+                <a href="#about" class="text-neutral-400 hover:text-white transition-colors duration-300">About</a>
+                <a href="#careers" class="text-neutral-400 hover:text-white transition-colors duration-300">Careers</a>
             </div>
-            <a href="#careers" class="md:hidden bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-600 transition-colors" data-key="mobile_apply">
-                立即应聘
-            </a>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <main class="container mx-auto px-6">
-        <section class="text-center py-20 md:py-32">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-100 leading-tight mb-4">
-                <span data-key="hero_title_1">全球首个</span>
-                <span class="block gradient-text mt-2" data-key="hero_title_2">Agent 数据与评估基础设施</span>
+    <main class="container mx-auto px-6 py-16 md:py-24">
+        <section class="text-center max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl tracking-tighter">
+                The World's First<br>
+                <span class="accent-green">Agent Data & Evaluation Infra</span>
             </h1>
-            <p class="max-w-3xl mx-auto text-slate-400 text-lg md:text-xl mt-6" data-key="hero_subtitle">
-                我们致力于构建 AI Agent 的底层基础设施，从高质量的数据收集到强大的能力评估环境。
+            <p class="max-w-2xl mx-auto text-neutral-400 text-base md:text-lg mt-6 leading-relaxed">
+                We build the foundational infrastructure for AI Agents. Our approach is rooted in the belief that truly productive agents emerge from two key elements:
             </p>
+            <ul class="max-w-2xl mx-auto text-neutral-400 text-base md:text-lg mt-4 space-y-3 list-none">
+                <li class="flex items-start">
+                    <span class="accent-green font-semibold mr-2">•</span>
+                    <span><span class="accent-green font-semibold">High-quality data</span> demonstrating how human experts accomplish jobs.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="accent-green font-semibold mr-2">•</span>
+                    <span><span class="accent-green font-semibold">RL environments</span> where agents can autonomously refine their skills.</span>
+                </li>
+            </ul>
             <div class="mt-10">
-                <a href="#careers" class="bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-bold py-3 px-8 rounded-full hover:scale-105 transform transition-transform duration-300 shadow-lg shadow-sky-500/20" data-key="hero_button">
-                    探索前沿职位
+                <a href="#careers" class="inline-block bg-[#34D399] text-black font-bold py-3 px-8 rounded-full hover:bg-white transition-colors duration-300" style="font-family: 'Inter', sans-serif;">
+                    Join Us
                 </a>
             </div>
         </section>
 
-        <!-- About Us Section -->
-        <section id="about" class="py-20">
+        <section id="about" class="mt-24 md:mt-32">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-100" data-key="about_title">我们的三大核心计划</h2>
-                <p class="text-slate-400 mt-4" data-key="about_subtitle">我们相信，通往通用人工智能的道路建立在三个相辅相成的支柱之上。</p>
+                <h2 class="text-3xl md:text-4xl">Three Core Products</h2>
+                <p class="text-neutral-400 mt-4">The path to AGI is built on three complementary pillars.</p>
             </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Prometheus Card -->
-                <div class="card-bg p-8 rounded-xl text-center transform hover:-translate-y-2 transition-transform duration-300">
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bordered-box p-8 text-center flex flex-col">
                     <div class="mx-auto mb-4 w-16 h-16 flex items-center justify-center rounded-full bg-slate-800">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.657 7.343A8 8 0 0117.657 18.657z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 16.121A3 3 0 1014.12 11.88l-4.242 4.242z" /></svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-100 mb-2" data-key="p_title">普罗米修斯计划</h3>
-                    <p class="text-amber-400 font-semibold mb-3" data-key="p_slogan">盗取人类智慧之火</p>
-                    <p class="text-slate-400" data-key="p_desc">我们捕获、提纯并构建世界上最高质量的数据集，将人类文明的知识与智慧，转化为驱动下一代 AI Agent 的核心燃料。</p>
+                    <h3 class="text-2xl">Prometheus</h3>
+                    <p class="accent-green font-semibold my-3" style="font-family: 'Inter', sans-serif;">Stealing the Fire of Human Wisdom</p>
+                    <p class="text-neutral-400 text-sm flex-grow">We build high-quality datasets on how human experts get long-horizon jobs done, transforming the knowledge of human civilization into the core fuel for the next generation of AI Agents.</p>
                 </div>
-                <!-- Hephaestus Card -->
-                <div class="card-bg p-8 rounded-xl text-center transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bordered-box p-8 text-center flex flex-col">
                     <div class="mx-auto mb-4 w-16 h-16 flex items-center justify-center rounded-full bg-slate-800">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-100 mb-2" data-key="h_title">赫菲斯托斯计划</h3>
-                    <p class="text-sky-400 font-semibold mb-3" data-key="h_slogan">为智慧体锻造世界</p>
-                    <p class="text-slate-400" data-key="h_desc">我们构建高度复杂、动态交互的虚拟环境。在这里，AI Agent 不再是执行代码的程序，而是学习、成长和创造的“数字公民”。</p>
+                    <h3 class="text-2xl">Hephaestus</h3>
+                    <p class="accent-green font-semibold my-3" style="font-family: 'Inter', sans-serif;">Forging Worlds for Intelligent Minds</p>
+                    <p class="text-neutral-400 text-sm flex-grow">We build highly capable, interactive virtual environments where AI Agents learn and grow rather than just code-executing programs.</p>
                 </div>
-                <!-- Colosseum Card -->
-                <div class="card-bg p-8 rounded-xl text-center transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bordered-box p-8 text-center flex flex-col">
                     <div class="mx-auto mb-4 w-16 h-16 flex items-center justify-center rounded-full bg-slate-800">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-100 mb-2" data-key="c_title">罗马斗兽场计划</h3>
-                    <p class="text-violet-400 font-semibold mb-3" data-key="c_slogan">衡量真正智能的竞技场</p>
-                    <p class="text-slate-400" data-key="c_desc">我们设立终极试炼场，通过最严苛的评估体系和对抗性测试，甄别 AI 的真实能力、智能边界与潜在风险，定义下一代 AI 的高度。</p>
+                    <h3 class="text-2xl">Colosseum</h3>
+                    <p class="accent-green font-semibold my-3" style="font-family: 'Inter', sans-serif;">The Arena to Measure Agent's True Productivity</p>
+                    <p class="text-neutral-400 text-sm flex-grow">We establish the ultimate proving ground, using rigorous evaluation to discern the true productivity, limits, and risks of AI comparing to human experts.</p>
                 </div>
             </div>
         </section>
 
-
-
-        <!-- Careers Section -->
-        <section id="careers" class="py-20">
+        <section id="careers" class="mt-24 md:mt-32">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-100" data-key="careers_title">加入我们，共赴星辰</h2>
-                <p class="text-slate-400 mt-4 max-w-2xl mx-auto" data-key="careers_subtitle">我们正在寻找那些不畏挑战、充满激情、渴望在人工智能无人区留下印记的开拓者。</p>
-                <p class="text-sky-300 mt-6 max-w-2xl mx-auto" data-key="careers_contact">感兴趣的候选人请将简历发送至：<a href="mailto:leo.liang.chen@outlook.com" class="font-semibold hover:underline">leo.liang.chen@outlook.com</a></p>
+                <h2 class="text-3xl md:text-4xl">Join Us</h2>
+                <p class="text-neutral-400 mt-4 max-w-2xl mx-auto">We are looking for pioneers who are fearless, passionate, and eager to make their mark in the uncharted territory of artificial intelligence.</p>
+                <p class="mt-6 max-w-2xl mx-auto">
+                    <span class="text-neutral-400">Send your resume to: </span>
+                    <a href="mailto:leo.liang.chen@outlook.com" class="accent-green font-semibold hover:underline">leo.liang.chen@outlook.com</a>
+                </p>
             </div>
-            <div class="space-y-12">
-                <!-- Job 1 -->
-                <div class="card-bg rounded-xl overflow-hidden md:flex">
-                    <div class="p-8 md:w-1/3 border-b md:border-b-0 md:border-r border-slate-700/50">
-                        <h3 class="text-2xl font-bold text-amber-400" data-key="job1_title">数据策略与获取专家</h3>
-                        <p class="text-slate-300 mt-1" data-key="job1_project">普罗米修斯计划</p>
-                        <p class="mt-4 text-slate-400" data-key="job1_desc">我们正在盗取文明的火种，为人工智能开启一个全新的纪元。</p>
-                    </div>
-                    <div class="p-8 md:w-2/3">
-                        <h4 class="font-bold text-slate-200 mb-2" data-key="jd_resp_title">岗位职责:</h4>
-                        <ul class="list-disc list-inside text-slate-400 space-y-2">
-                            <li data-key="job1_resp_1">设计并实施创新的数据收集框架，从海量、多模态的领域中捕获高价值信息。</li>
-                            <li data-key="job1_resp_2">构建业界领先的数据清洗、标注与验证流水线，确保每一份数据都纯净、高质。</li>
-                            <li data-key="job1_resp_3">探索并实践合成数据的生成与应用，突破真实世界数据的边界。</li>
-                            <li data-key="job1_resp_4">与算法团队紧密合作，深刻理解模型需求，并前瞻性地规划数据蓝图。</li>
-                        </ul>
-                        <h4 class="font-bold text-slate-200 mt-6 mb-2" data-key="jd_req_title">任职要求:</h4>
-                        <ul class="list-disc list-inside text-slate-400 space-y-2">
-                            <li data-key="job1_req_1">计算机科学、人工智能或相关领域的深厚学术背景。</li>
-                            <li data-key="job1_req_2">拥有大规模数据处理、NLP、数据挖掘或相关项目的实战经验。</li>
-                            <li data-key="job1_req_3">对数据充满极致的热情与洁癖，坚信数据质量是模型能力的基石。</li>
-                            <li data-key="job1_req_4">具备创造性思维，勇于探索未知领域。</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Job 2 -->
-                <div class="card-bg rounded-xl overflow-hidden md:flex">
-                    <div class="p-8 md:w-1/3 border-b md:border-b-0 md:border-r border-slate-700/50">
-                        <h3 class="text-2xl font-bold text-sky-400" data-key="job2_title">智能体虚拟世界架构师</h3>
-                        <p class="text-slate-300 mt-1" data-key="job2_project">赫菲斯托斯计划</p>
-                        <p class="mt-4 text-slate-400" data-key="job2_desc">伟大的工匠从不局限于工具，他们创造世界。</p>
-                    </div>
-                    <div class="p-8 md:w-2/3">
-                        <h4 class="font-bold text-slate-200 mb-2" data-key="jd_resp_title">岗位职责:</h4>
-                        <ul class="list-disc list-inside text-slate-400 space-y-2">
-                            <li data-key="job2_resp_1">主导设计和开发高度复杂的交互式模拟环境，支持 Agent 的各类活动。</li>
-                            <li data-key="job2_resp_2">构建稳健、高效的 API 接口，确保 Agent 与虚拟世界流畅交互。</li>
-                            <li data-key="job2_resp_3">将游戏设计、社会学原理融入环境构建，创造真实的“数字社会”。</li>
-                            <li data-key="job2_resp_4">研发配套的环境生成与管理工具，实现虚拟世界的可扩展性与多样性。</li>
-                        </ul>
-                        <h4 class="font-bold text-slate-200 mt-6 mb-2" data-key="jd_req_title">任职要求:</h4>
-                        <ul class="list-disc list-inside text-slate-400 space-y-2">
-                            <li data-key="job2_req_1">卓越的软件工程能力，精通 Python/C++。</li>
-                            <li data-key="job2_req_2">拥有游戏引擎或复杂模拟环境的开发经验者优先。</li>
-                            <li data-key="job2_req_3">对强化学习、多智能体系统有深入的理解。</li>
-                            <li data-key="job2_req_4">富有想象力，并能将这种想象力转化为坚实、可靠的代码。</li>
-                        </ul>
+            <div class="space-y-6">
+                <div class="bordered-box overflow-hidden">
+                    <div class="p-8">
+                        <h3 class="text-xl md:text-2xl accent-green">Human Data Engineer</h3>
+                        <p class="mt-2 text-neutral-400 text-sm">We are stealing the fire of civilization to ignite a new era for artificial intelligence.</p>
+                        <div class="mt-6 grid md:grid-cols-2 gap-x-8 gap-y-6 text-sm">
+                            <div>
+                                <h4 class="mb-2">Responsibilities:</h4>
+                                <ul class="list-disc list-inside text-neutral-400 space-y-2">
+                                    <li>Build expert data cleaning, annotation & validation pipelines.</li>
+                                    <li>Explore generation and application of synthetic data.</li>
+                                    <li>Manage the human experts team.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="mb-2">Requirements:</h4>
+                                <ul class="list-disc list-inside text-neutral-400 space-y-2">
+                                    <li>Experience in annotators and human data management.</li>
+                                    <li>A passion for data quality as a core principle.</li>
+                                    <li>Creative thinking and courage to explore.</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Job 3 -->
-                <div class="card-bg rounded-xl overflow-hidden md:flex">
-                    <div class="p-8 md:w-1/3 border-b md:border-b-0 md:border-r border-slate-700/50">
-                        <h3 class="text-2xl font-bold text-violet-400" data-key="job3_title">AI Agent 首席评估官</h3>
-                        <p class="text-slate-300 mt-1" data-key="job3_project">罗马斗兽场计划</p>
-                        <p class="mt-4 text-slate-400" data-key="job3_desc">真理，只在最严酷的角斗中显现。</p>
-                    </div>
-                    <div class="p-8 md:w-2/3">
-                        <h4 class="font-bold text-slate-200 mb-2" data-key="jd_resp_title">岗位职责:</h4>
-                        <ul class="list-disc list-inside text-slate-400 space-y-2">
-                            <li data-key="job3_resp_1">开创并定义全新的 Agent 能力评估维度与基准，涵盖任务、适应性、创造力乃至伦理。</li>
-                            <li data-key="job3_resp_2">设计并执行大规模、高强度的对抗性测试和压力测试，挖掘 Agent 的行为模式。</li>
-                            <li data-key="job3_resp_3">深度解读评估结果，提供富有洞察力的分析报告，直接驱动模型迭代。</li>
-                            <li data-key="job3_resp_4">持续追踪 AI 安全与对齐领域的前沿研究，并将其融入评估体系。</li>
-                        </ul>
-                        <h4 class="font-bold text-slate-200 mt-6 mb-2" data-key="jd_req_title">任职要求:</h4>
-                        <ul class="list-disc list-inside text-slate-400 space-y-2">
-                            <li data-key="job3_req_1">统计学、人工智能、认知科学等领域的博士或同等研究经验。</li>
-                            <li data-key="job3_req_2">在 AI 模型评估、基准测试或实验设计方面拥有丰富的实践经验。</li>
-                            <li data-key="job3_req_3">具备极强的批判性思维和第一性原理思考能力。</li>
-                            <li data-key="job3_req_4">对 AI 的能力边界和潜在风险有深刻的见解和高度的责任感。</li>
-                        </ul>
+                <div class="bordered-box overflow-hidden">
+                    <div class="p-8">
+                        <h3 class="text-xl md:text-2xl accent-green">Agent Environment Engineer</h3>
+                        <p class="mt-2 text-neutral-400 text-sm">Great artisans are not limited by tools; they create worlds.</p>
+                        <div class="mt-6 grid md:grid-cols-2 gap-x-8 gap-y-6 text-sm">
+                            <div>
+                                <h4 class="mb-2">Responsibilities:</h4>
+                                <ul class="list-disc list-inside text-neutral-400 space-y-2">
+                                    <li>Design interactive RL environments for agents including GUI and MCP ones.</li>
+                                    <li>Create benchmarks and reward models mapping to real-world productive tasks.</li>
+                                    <li>Develop tools for automatic environment generation.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="mb-2">Requirements:</h4>
+                                <ul class="list-disc list-inside text-neutral-400 space-y-2">
+                                    <li>Excellent software engineering skills, familar with docker.</li>
+                                    <li>In-depth understanding of RL & agent systems.</li>
+                                    <li>Ability to translate imagination into reliable code.</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="text-center mb-16">
+
+                <p class="mt-6 max-w-2xl mx-auto">
+                    <br>
+                    <span class="text-neutral-400">For inquiries, you can reach us at: </span>
+                    <a href="mailto:leo.liang.chen@outlook.com" class="accent-green font-semibold hover:underline">leo.liang.chen@outlook.com</a>
+                </p>
+
+                </div>
+
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-800 mt-20">
-        <div class="container mx-auto px-6 py-8 text-center text-slate-500">
-            <p data-key="footer_copyright">&copy; 2025 星原智能 (Starsfield AI). All Rights Reserved.</p>
-            <p class="text-sm mt-2" data-key="footer_motto">全球首个 Agent 数据与评估基础设施</p>
+    <footer class="border-t border-[#27272A] mt-24 md:mt-32">
+        <div class="container mx-auto px-6 py-8 text-center text-neutral-500 text-sm">
+            <p>&copy; 2025 Starsfield AI. All Rights Reserved.</p>
+            <p class="mt-2">The World's First Agent Data & Evaluation Infrastructure</p>
         </div>
     </footer>
 
-    <script>
-        // --- Starfield Logic ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const canvas = document.getElementById('starfield');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-
-            const mouse = {
-                x: null,
-                y: null,
-                radius: 150
-            };
-
-            window.addEventListener('mousemove', event => {
-                mouse.x = event.x;
-                mouse.y = event.y;
-            });
-            window.addEventListener('mouseout', () => {
-                mouse.x = null;
-                mouse.y = null;
-            });
-
-            let stars = [];
-            const starCount = Math.floor((canvas.width + canvas.height) / 8);
-
-            for (let i = 0; i < starCount; i++) {
-                stars.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: Math.random() * 1.1 + 0.5,
-                    vx: (Math.random() - 0.5) * 0.2,
-                    vy: (Math.random() - 0.5) * 0.2,
-                    originalRadius: Math.random() * 1.1 + 0.5,
-                });
-            }
-
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-                
-                stars.forEach(star => {
-                    ctx.beginPath();
-                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                    ctx.fill();
-                });
-
-                ctx.beginPath();
-                for (let i = 0; i < stars.length; i++) {
-                    for (let j = i + 1; j < stars.length; j++) {
-                        let dist = Math.hypot(stars[i].x - stars[j].x, stars[i].y - stars[j].y);
-                        if (dist < 100) {
-                            ctx.moveTo(stars[i].x, stars[i].y);
-                            ctx.lineTo(stars[j].x, stars[j].y);
-                        }
-                    }
-                }
-                ctx.strokeStyle = 'rgba(15, 23, 42, 0)'; // Initially transparent
-                if (mouse.x !== null) {
-                    ctx.strokeStyle = 'rgba(125, 211, 252, 0.08)'; // sky-300 with low opacity
-                }
-                ctx.lineWidth = 0.5;
-                ctx.stroke();
-            }
-
-            function update() {
-                stars.forEach(star => {
-                    // Boundary check
-                    if (star.x < 0 || star.x > canvas.width) {
-                        star.vx = -star.vx;
-                    }
-                    if (star.y < 0 || star.y > canvas.height) {
-                        star.vy = -star.vy;
-                    }
-                    star.x += star.vx;
-                    star.y += star.vy;
-
-                    // Mouse interaction
-                    if (mouse.x !== null) {
-                        let dx = mouse.x - star.x;
-                        let dy = mouse.y - star.y;
-                        let distance = Math.sqrt(dx * dx + dy * dy);
-                        if (distance < mouse.radius) {
-                           star.radius = star.originalRadius + (mouse.radius - distance) / 20;
-                        } else {
-                           star.radius = star.originalRadius;
-                        }
-                    } else {
-                        star.radius = star.originalRadius;
-                    }
-                });
-            }
-
-            function animate() {
-                update();
-                draw();
-                requestAnimationFrame(animate);
-            }
-            animate();
-        });
-
-
-        // --- Translation Data ---
-        const translations = {
-            en: {
-                company_name: "Starsfield AI",
-                nav_about: "About Us",
-                nav_careers: "Join Us",
-                mobile_apply: "Apply Now",
-                hero_title_1: "The World's First",
-                hero_title_2: "Agent Data & Evaluation Infra",
-                hero_subtitle: "We are dedicated to building the foundational infrastructure for AI Agents, from high-quality expert data collection to powerful reinforcement learning environments and capability evaluation systems.",
-                hero_button: "Explore Open Positions",
-                about_title: "Our Three Core Projects",
-                about_subtitle: "We believe the path to truly productive Agents is built on three complementary pillars.",
-                p_title: "Project Prometheus",
-                p_slogan: "Stealing the Fire of Human Wisdom",
-                p_desc: "We capture, refine, and build the world's highest-quality solutions of human experts solving problems end-to-end, transforming the knowledge and wisdom of human civilization into the core fuel for the next generation of AI Agents.",
-                h_title: "Project Hephaestus",
-                h_slogan: "Forging Worlds for Intelligent Minds",
-                h_desc: "We build highly complex, dynamically interactive virtual environments. Here, AI Agents are not just programs executing code, but 'digital citizens' that learn, grow, and create.",
-                c_title: "Project Colosseum",
-                c_slogan: "The Arena to Measure True Intelligence",
-                c_desc: "We establish the ultimate proving ground to define the heights of next-gen AI by comparing the real-world capabilities of AI and humans in practical productivity scenarios through the most rigorous evaluation systems and adversarial testing.",
-                team_title: "Our Core Team",
-                team_subtitle: "Led by industry visionaries and top technical experts.",
-                ceo_name: "Liang Chen",
-                ceo_title: "CEO & Co-Founder",
-                ceo_desc: "PKU PhD Student, formerly at Qwen and Kimi.",
-                cto_name: "Lei Li",
-                cto_title: "CTO & Co-Founder",
-                cto_desc: "HKU PhD Student, core contributor to Reka VLM and MiMoVL.",
-                advisor_name: "Tianbao Xie",
-                advisor_title: "Agent Research Advisor",
-                advisor_desc: "HKU PhD Student, author of OS-World, Agent research expert.",
-                careers_title: "Join Us to Reach for the Stars",
-                careers_subtitle: "We are looking for pioneers who are fearless, passionate, and eager to make their mark in the uncharted territory of artificial intelligence.",
-                careers_contact: "Interested candidates, please send your resume to: <a href='mailto:leo.liang.chen@outlook.com' class='font-semibold hover:underline'>leo.liang.chen@outlook.com</a>",
-                jd_resp_title: "Responsibilities:",
-                jd_req_title: "Requirements:",
-                job1_title: "Data Strategy & Acquisition Specialist",
-                job1_project: "Project Prometheus",
-                job1_desc: "We are stealing the fire of civilization to ignite a new era for artificial intelligence.",
-                job1_resp_1: "Design and implement innovative data collection framework systems to capture high-value information from human experts' end-to-end problem-solving solutions.",
-                job1_resp_2: "Build industry-leading data cleaning, annotation, and validation pipelines to ensure data purity and quality.",
-                job1_resp_3: "Explore and practice the generation and application of synthetic data to transcend the limits of real-world data.",
-                job1_resp_4: "Collaborate closely with the algorithm team to deeply understand model requirements and proactively plan the future data roadmap.",
-                job1_req_1: "Academic background in Computer Science, Artificial Intelligence, or related fields.",
-                job1_req_2: "Experience in building data annotation systems or in personnel management.",
-                job1_req_3: "An ultimate passion for data and a belief that data quality is the cornerstone of model capability.",
-                job1_req_4: "Creative thinking and the courage to explore uncharted territories.",
-                job2_title: "Agent Virtual World Architect",
-                job2_project: "Project Hephaestus",
-                job2_desc: "Great artisans are not limited by tools; they create worlds.",
-                job2_resp_1: "Lead the design and development of highly complex interactive simulation environments to support various Agent activities, not limited to GUI Agents or MCP Agents.",
-                job2_resp_2: "Build robust and efficient APIs to ensure seamless interaction between Agents and the virtual world.",
-                job2_resp_3: "Transform real-world productive task scenarios into virtual world task scenarios, building automatically evaluable reinforcement learning environments.",
-                job2_resp_4: "Develop supporting tools for environment generation and management to ensure scalability and diversity.",
-                job2_req_1: "Excellent software engineering skills, proficient in virtualization technologies such as Docker.",
-                job2_req_2: "Experience in developing RL simulation environments is preferred.",
-                job2_req_3: "In-depth understanding of reinforcement learning and agent systems.",
-                job2_req_4: "Imaginative and able to translate that imagination into solid, reliable code.",
-                job3_title: "Lead AI Agent Evaluator",
-                job3_project: "Project Colosseum",
-                job3_desc: "Truth is only revealed in the harshest of contests.",
-                job3_resp_1: "Pioneer and define new Agent capability evaluation dimensions and benchmarks, covering tasks, adaptability, creativity, and even ethics.",
-                job3_resp_2: "Design and execute large-scale, high-intensity adversarial and stress tests to uncover Agent behavioral patterns.",
-                job3_resp_3: "Provide insightful analysis reports by deeply interpreting evaluation results to directly drive model iteration.",
-                job3_resp_4: "Continuously track cutting-edge research in AI Safety and Alignment and integrate it into the evaluation system.",
-                job3_req_1: "Research experience in fields such as Agents, Artificial Intelligence, or Cognitive Science.",
-                job3_req_2: "Rich practical experience in Agent model evaluation, benchmarking, or experimental design.",
-                job3_req_3: "Strong critical thinking and first-principles thinking skills.",
-                job3_req_4: "Adept at defining new benchmarks and conducting evaluations.",
-                footer_copyright: "© 2025 Starsfield AI. All Rights Reserved.",
-                footer_motto: "The world's first agent data and evaluation Infra."
-            },
-            zh: {
-                company_name: "星原智能",
-                nav_about: "关于我们",
-                nav_careers: "加入我们",
-                mobile_apply: "立即应聘",
-                hero_title_1: "全球首个",
-                hero_title_2: "Agent 数据与评估基础设施",
-                hero_subtitle: "我们致力于构建 AI Agent 的底层基础设施，从高质量的专家数据收集到强大的强化学习环境与能力评估体系。",
-                hero_button: "探索前沿职位",
-                about_title: "我们的三大核心计划",
-                about_subtitle: "我们相信，通往真正具有生产力的Agent的道路建立在三个相辅相成的支柱之上。",
-                p_title: "普罗米修斯计划",
-                p_slogan: "盗取人类智慧之火",
-                p_desc: "我们捕获、提纯并构建世界上高质量的人类专家端到端解决问题的方案，将人类文明的知识与智慧，转化为驱动下一代 AI Agent 的核心燃料。",
-                h_title: "赫菲斯托斯计划",
-                h_slogan: "为智慧体锻造世界",
-                h_desc: "我们构建高度复杂、动态交互的虚拟环境。在这里，AI Agent 不再是执行代码的程序，而是学习、成长和创造的“数字公民”。",
-                c_title: "罗马斗兽场计划",
-                c_slogan: "衡量真正智能的竞技场",
-                c_desc: "我们设立终极试炼场，通过最严苛的评估体系和对抗性测试，对比 AI 和人类在实际生产力场景中的真实能力，定义下一代 AI 的高度。",
-                team_title: "核心团队",
-                team_subtitle: "由行业远见者与顶尖技术专家引领。",
-                ceo_name: "陈亮",
-                ceo_title: "CEO & Co-Founder",
-                ceo_desc: "PKU PhD Student, Pre Qwen and Kimi",
-                cto_name: "李磊",
-                cto_title: "CTO & 联合创始人",
-                cto_desc: "HKU PhD Student, Reka VLM and MiMoVL 核心贡献者",
-                advisor_name: "谢天宝",
-                advisor_title: "Agent Research Advisor",
-                advisor_desc: "HKU PhD Student, OS World 作者，Agent 研究专家",
-                careers_title: "加入我们，共赴星辰",
-                careers_subtitle: "我们正在寻找那些不畏挑战、充满激情、渴望在人工智能无人区留下印记的开拓者。",
-                careers_contact: "感兴趣的候选人请将简历发送至：<a href='mailto:leo.liang.chen@outlook.com' class='font-semibold hover:underline'>leo.liang.chen@outlook.com</a>",
-                jd_resp_title: "岗位职责:",
-                jd_req_title: "任职要求:",
-                job1_title: "数据策略与获取专家",
-                job1_project: "普罗米修斯计划",
-                job1_desc: "我们正在盗取文明的火种，为人工智能开启一个全新的纪元。",
-                job1_resp_1: "设计并实施创新的数据收集框架系统，从人类专家端到端解决问题的方案中，捕获高价值信息。",
-                job1_resp_2: "构建业界领先的数据清洗、标注与验证流水线，确保每一份数据都纯净、高质。",
-                job1_resp_3: "探索并实践合成数据的生成与应用，突破真实世界数据的边界。",
-                job1_resp_4: "与算法团队紧密合作，深刻理解模型需求，并前瞻性地规划数据蓝图。",
-                job1_req_1: "计算机科学、人工智能或相关领域的学术背景。",
-                job1_req_2: "拥有数据标注系统的构建或人员管理经验。",
-                job1_req_3: "对数据充满极致的热情与洁癖，坚信数据质量是模型能力的基石。",
-                job1_req_4: "具备创造性思维，勇于探索未知领域。",
-                job2_title: "智能体虚拟世界架构师",
-                job2_project: "赫菲斯托斯计划",
-                job2_desc: "伟大的工匠从不局限于工具，他们创造世界。",
-                job2_resp_1: "主导设计和开发高度复杂的交互式模拟环境，支持 Agent 的各类活动，不局限于GUI Agent或者MCP Agent。",
-                job2_resp_2: "构建稳健、高效的 API 接口，确保 Agent 与虚拟世界流畅交互。",
-                job2_resp_3: "将真实世界的有生产力的任务场景，转化为虚拟世界中的任务场景，构建可自动评估的强化学习环境。",
-                job2_resp_4: "研发配套的环境生成与管理工具，实现虚拟世界的可扩展性与多样性。",
-                job2_req_1: "卓越的软件工程能力，精通Docker等虚拟化技术。",
-                job2_req_2: "拥有RL模拟环境的开发经验者优先。",
-                job2_req_3: "对强化学习、智能体系统有深入的理解。",
-                job2_req_4: "富有想象力，并能将这种想象力转化为坚实、可靠的代码。",
-                job3_title: "AI Agent 首席评估官",
-                job3_project: "罗马斗兽场计划",
-                job3_desc: "真理，只在最严酷的角斗中显现。",
-                job3_resp_1: "开创并定义全新的 Agent 能力评估维度与基准，涵盖任务、适应性、创造力乃至伦理。",
-                job3_resp_2: "设计并执行大规模、高强度的对抗性测试和压力测试，挖掘 Agent 的行为模式。",
-                job3_resp_3: "深度解读评估结果，提供富有洞察力的分析报告，直接驱动模型迭代。",
-                job3_resp_4: "持续追踪 AI 安全与对齐领域的前沿研究，并将其融入评估体系。",
-                job3_req_1: "Agent, 人工智能, 认知科学等领域的研究经验。",
-                job3_req_2: "在 Agent 模型评估、基准测试或实验设计方面拥有丰富的实践经验。",
-                job3_req_3: "具备极强的批判性思维和第一性原理思考能力。",
-                job3_req_4: "善于定义新的Benchmark，并进行评估。",
-                footer_copyright: "© 2025 星原智能 (Starsfield AI). All Rights Reserved.",
-                footer_motto: "全球首个 Agent 数据与评估基础设施"
-            }
-        };
-
-        // --- Language Switching Logic ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const langSwitcher = document.getElementById('lang-switcher');
-            let currentLang = 'zh'; // Default language
-
-            const switchLanguage = (lang) => {
-                document.documentElement.lang = lang;
-                document.querySelectorAll('[data-key]').forEach(element => {
-                    const key = element.getAttribute('data-key');
-                    if (translations[lang] && translations[lang][key]) {
-                        element.innerHTML = translations[lang][key];
-                    }
-                });
-            };
-
-            langSwitcher.addEventListener('click', () => {
-                currentLang = currentLang === 'zh' ? 'en' : 'zh';
-                switchLanguage(currentLang);
-            });
-
-            // Set initial language on page load
-            switchLanguage(currentLang);
-        });
-    </script>
 </body>
 </html>
